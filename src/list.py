@@ -9,6 +9,12 @@ def show_list():
     my_list = list(lists[current_user.id])
     return json.dumps(my_list)
 
+def create_list(items):
+    lists[current_user.id] = set()
+    for item in items:
+        lists[current_user.id].add(item)
+
+
 def add_to_list(items):
     if current_user.id not in items:
         lists[current_user.id] = set()

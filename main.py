@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_login import LoginManager, login_required
 
 from src.classes.User import User
-from src.list import show_list, add_to_list, remove_from_list
+from src.list import show_list, add_to_list, remove_from_list, create_list
 from src.user_authentication import authenticate, disauthenticate
 
 app = Flask(__name__)
@@ -34,6 +34,13 @@ def logout():
 @app.route('/list', methods=['GET'])
 @login_required
 def get_list():
+    return show_list()
+
+@app.route('/list', methods=['PUT'])
+@login_required
+def put_list():
+    body = request.get_json()
+    create_list(body.get('list'))
     return show_list()
 
 @app.route('/list', methods=['PATCH'])
