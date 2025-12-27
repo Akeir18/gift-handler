@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_login import LoginManager, login_required
 
 from src.classes.User import User
+from src.list import show_list
 from src.user_authentication import authenticate, disauthenticate
 
 app = Flask(__name__)
@@ -29,6 +30,11 @@ def login():
 @login_required
 def logout():
     return disauthenticate()
+
+@app.route('/list', methods=['GET'])
+@login_required
+def get_list():
+    return show_list()
 
 
 if __name__ == '__main__':
