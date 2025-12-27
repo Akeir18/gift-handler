@@ -40,8 +40,12 @@ def get_list():
 @login_required
 def update_list():
     body = request.get_json()
-    add_to_list(body.get('add'))
-    remove_from_list(body.get('remove'))
+    add = body.get('add')
+    if add:
+        add_to_list(body.get('add'))
+    remove = body.get('remove')
+    if remove:
+        remove_from_list(body.get('remove'))
     return show_list()
 
 
