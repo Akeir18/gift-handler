@@ -27,3 +27,7 @@ def remove_from_list(items):
     for item in items:
         if item in lists[current_user.id]:
             lists[current_user.id].remove(item)
+
+def show_user_list(username):
+    my_list = list(lists[username])
+    return json.dumps(my_list)

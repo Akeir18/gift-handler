@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_login import LoginManager, login_required
 
 from src.classes.User import User
-from src.list import show_list, add_to_list, remove_from_list, create_list
+from src.list import show_list, add_to_list, remove_from_list, create_list, show_user_list
 from src.user_authentication import authenticate, disauthenticate
 
 app = Flask(__name__)
@@ -55,6 +55,10 @@ def update_list():
         remove_from_list(body.get('remove'))
     return show_list()
 
+@app.route('/list/<string:username>', methods=['GET'])
+@login_required
+def get_user_list(username):
+    return show_user_list(username)
 
 if __name__ == '__main__':
     app.run(debug=True)
